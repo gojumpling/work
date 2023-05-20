@@ -31,4 +31,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return this.list(lambdaQueryWrapper);
 
     }
+
+    @Override
+    public List<User> getAllUser() {
+
+        return this.list();
+    }
+
+    @Override
+    public User login(String account, String password) {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getAccount,account);
+        lambdaQueryWrapper.eq(User::getPassword,password);
+
+        return this.getOne(lambdaQueryWrapper);
+    }
+
+    @Override
+    public Boolean register(User user) {
+        return this.save(user);
+    }
 }

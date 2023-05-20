@@ -8,6 +8,8 @@ import com.code.pojo.Work;
 import com.code.service.WorkService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -20,19 +22,26 @@ import org.springframework.stereotype.Service;
 public class WorkServiceImpl extends ServiceImpl<WorkMapper, Work> implements WorkService {
 
     @Override
-    public int createWork(Work work) {
-        this.save(work);
-        LambdaQueryWrapper<Work> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.orderByDesc(Work::getWordId);
-        return this.getOne(lambdaQueryWrapper).getWordId();
+    public Boolean createWork(Work work) {
+        return this.save(work);
+
     }
 
     @Override
-    public boolean finishWork(int wid) {
+    public Boolean updateWork(Work work) {
+        return this.updateById(work);
+    }
+
+
+
+    @Override
+    public List<Work> getWork(List<Integer> list) {
+
         LambdaQueryWrapper<Work> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(Work::getWordId,wid);
-        Work work = this.getOne(lambdaQueryWrapper);
-        return this.saveOrUpdate(work);
+        lambdaQueryWrapper.in(Work::getSprintId,list);
+
+        return this.list(lambdaQueryWrapper);
+
     }
 
 

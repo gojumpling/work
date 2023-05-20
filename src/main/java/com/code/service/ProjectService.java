@@ -30,4 +30,6 @@ public interface ProjectService extends IService<Project> {
      */
     List<Project> getProject(List<Integer> list);
 
+    Project getProjectById(int pid);
+
 }

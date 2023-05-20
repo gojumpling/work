@@ -29,15 +29,31 @@ public class EpicController {
 
     @RequestMapping("/create_epic")
     public Boolean createEpic(@RequestBody Map<String, Object> map){
+        int pid = Integer.parseInt(map.get("pid").toString());
         String name = map.get("name").toString();
         String overview = map.get("overview").toString();
-        int pid = Integer.parseInt(map.get("pid").toString());
+
 
         Epic epic = new Epic(pid,name,overview);
 
         return epicService.createEpic(epic);
 
     }
+
+    @RequestMapping("/update_epic")
+    public Boolean updateEpic(@RequestBody Map<String, Object> map){
+        int eid = Integer.parseInt(map.get("eid").toString());
+        int pid = Integer.parseInt(map.get("pid").toString());
+        String name = map.get("name").toString();
+        String overview = map.get("overview").toString();
+
+        Epic epic = new Epic(eid,pid,name,overview);
+
+        return epicService.updateEpic(epic);
+
+
+    }
+
 
 
 }

@@ -8,6 +8,8 @@ import com.code.service.EpicService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -23,8 +25,19 @@ public class EpicServiceImpl extends ServiceImpl<EpicMapper, Epic> implements Ep
     public Boolean createEpic(Epic epic) {
         return this.save(epic);
 
-//        LambdaQueryWrapper<Epic> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-//        lambdaQueryWrapper.orderByDesc(Epic::getEpicId);
-//        return this.getOne(lambdaQueryWrapper).getEpicId();
+
+    }
+
+    @Override
+    public List<Epic> getEpicByPid(int pid) {
+
+        LambdaQueryWrapper<Epic> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Epic::getProjectId,pid);
+        return this.list(lambdaQueryWrapper);
+    }
+
+    @Override
+    public Boolean updateEpic(Epic epic) {
+        return this.updateById(epic);
     }
 }

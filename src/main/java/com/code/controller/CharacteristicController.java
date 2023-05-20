@@ -40,6 +40,24 @@ public class CharacteristicController {
     }
 
 
+    @RequestMapping("/update_characteristic")
+    public Boolean updateCharacteristic(@RequestBody Map<String, Object> map){
+
+        int cid = Integer.parseInt(map.get("cid").toString());
+        int eid = Integer.parseInt(map.get("eid").toString());
+        String name = map.get("name").toString();
+        String overview = map.get("overview").toString();
+
+        Characteristic characteristic = new Characteristic(cid,eid,name,overview);
+
+        return characteristicService.updateCharacteristic(characteristic);
+
+    }
+
+
+
+
+
 }
 
 

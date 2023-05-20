@@ -8,6 +8,9 @@ import com.code.service.SprintService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * <p>
  *  服务实现类
@@ -20,10 +23,23 @@ import org.springframework.stereotype.Service;
 public class SprintServiceImpl extends ServiceImpl<SprintMapper, Sprint> implements SprintService {
 
     @Override
-    public int createSprint(Sprint sprint) {
-        this.save(sprint);
+    public Boolean createSprint(Sprint sprint) {
+        return this.save(sprint);
+
+    }
+
+    @Override
+    public Boolean updateSprint(Sprint sprint) {
+        return this.updateById(sprint);
+    }
+
+    @Override
+    public List<Integer> getSprintID(int pid) {
+
         LambdaQueryWrapper<Sprint> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.orderByDesc(Sprint::getSprintId);
-        return this.getOne(lambdaQueryWrapper).getSprintId();
+        lambdaQueryWrapper.eq(Sprint::getProjectId,pid);
+
+        return this.list(lambdaQueryWrapper)
+                .stream().map(Sprint::getSprintId).collect(Collectors.toList());
     }
 }

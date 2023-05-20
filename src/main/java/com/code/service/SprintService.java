@@ -3,6 +3,8 @@ package com.code.service;
 import com.code.pojo.Sprint;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,6 +15,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SprintService extends IService<Sprint> {
 
-    int createSprint(Sprint sprint);
+
+    /**
+     * 创建一个迭代
+     * @param sprint
+     * @return Boolean
+     */
+    Boolean createSprint(Sprint sprint);
+
+    Boolean updateSprint(Sprint sprint);
+
+    List<Integer> getSprintID(int pid);
 
 }

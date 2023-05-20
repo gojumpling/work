@@ -35,10 +35,24 @@ public class StoryController {
         String overview = map.get("overview").toString();
         int cid = Integer.parseInt(map.get("cid").toString());
 
-        Story story = new Story(cid,name,overview);
+        Story story = new Story(cid,name,overview,"未完成");
 
         return storyService.createStory(story);
 
+    }
+
+    @RequestMapping("/update_story")
+    public boolean updateStory(@RequestBody Map<String, Object> map){
+        int story_id = Integer.parseInt(map.get("sid").toString());
+        int cid = Integer.parseInt(map.get("cid").toString());
+        String name = map.get("name").toString();
+        String overview = map.get("overview").toString();
+        String state = map.get("state").toString();
+
+
+        Story story = new Story(story_id,cid,name,overview,state);
+
+        return storyService.updateStory(story);
     }
 
 

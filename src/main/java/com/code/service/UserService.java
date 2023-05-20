@@ -22,5 +22,12 @@ public interface UserService extends IService<User> {
      * @return
      */
     List<User> getUser(List<Integer> list);
+    List<User> getAllUser();
+
+    User login(String account,String password);
+
+    Boolean register(User user);
+
+
 
 }

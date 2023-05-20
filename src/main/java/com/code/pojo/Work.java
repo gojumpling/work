@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Work implements Serializable {
@@ -38,14 +41,16 @@ public class Work implements Serializable {
 
     private String name;
 
+    private String overview;
+
     private String state;
 
-
-    public Work(Integer sprintId, Integer storyId, Integer userId, String name) {
+    public Work(Integer sprintId, Integer storyId, Integer userId, String name, String overview,String state) {
         this.sprintId = sprintId;
         this.storyId = storyId;
         this.userId = userId;
         this.name = name;
-
+        this.overview = overview;
+        this.state = state;
     }
 }

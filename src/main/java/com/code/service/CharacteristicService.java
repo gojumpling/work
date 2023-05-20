@@ -3,6 +3,9 @@ package com.code.service;
 import com.code.pojo.Characteristic;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Calendar;
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,5 +17,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface CharacteristicService extends IService<Characteristic> {
 
     Boolean createCharacteristic(Characteristic characteristic);
+    Boolean updateCharacteristic(Characteristic characteristic);
+
+
+    List<Characteristic> getCharacteristicByEid(int eid);
 
 }

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Story implements Serializable {
@@ -36,9 +39,10 @@ public class Story implements Serializable {
 
     private String state;
 
-    public Story(Integer characteristicId, String name, String overview) {
+    public Story(Integer characteristicId, String name, String overview,String state) {
         this.characteristicId = characteristicId;
         this.name = name;
         this.overview = overview;
+        this.state = state;
     }
 }

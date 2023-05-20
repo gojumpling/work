@@ -40,4 +40,12 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 
         return this.list(lambdaQueryWrapper);
     }
+
+    @Override
+    public Project getProjectById(int pid) {
+        LambdaQueryWrapper<Project> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Project::getProjectId,pid);
+
+        return this.getOne(lambdaQueryWrapper);
+    }
 }

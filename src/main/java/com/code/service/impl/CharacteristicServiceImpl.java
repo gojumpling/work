@@ -8,6 +8,8 @@ import com.code.service.CharacteristicService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -22,8 +24,20 @@ public class CharacteristicServiceImpl extends ServiceImpl<CharacteristicMapper,
     @Override
     public Boolean createCharacteristic(Characteristic characteristic) {
         return this.save(characteristic);
-//        LambdaQueryWrapper<Characteristic> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-//        lambdaQueryWrapper.orderByDesc(Characteristic::getCharacteristicId);
-//        return this.getOne(lambdaQueryWrapper).getCharacteristicId();
+
     }
+
+    @Override
+    public Boolean updateCharacteristic(Characteristic characteristic) {
+        return this.updateById(characteristic);
+    }
+
+    @Override
+    public List<Characteristic> getCharacteristicByEid(int eid) {
+        LambdaQueryWrapper<Characteristic> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Characteristic::getEpicId,eid);
+        return this.list(lambdaQueryWrapper);
+    }
+
+
 }

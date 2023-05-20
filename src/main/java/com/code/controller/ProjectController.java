@@ -1,10 +1,10 @@
 package com.code.controller;
 
 
-import com.code.pojo.Project;
-import com.code.pojo.Team;
-import com.code.service.ProjectService;
-import com.code.service.TeamService;
+import com.code.bean.ExtendCharacteristic;
+import com.code.bean.ExtendEpic;
+import com.code.pojo.*;
+import com.code.service.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,9 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -38,6 +37,14 @@ public class ProjectController {
 
     @Resource
     TeamService teamService;
+
+
+    @Resource
+    EpicService epicService;
+    @Resource
+    CharacteristicService characteristicService;
+    @Resource
+    StoryService storyService;
 
 
 
@@ -85,9 +92,52 @@ public class ProjectController {
         int uid = Integer.parseInt(map.get("uid").toString());
         List<Integer> list = teamService.getProjectID(uid);
 
-
-
         return projectService.getProject(list);
+    }
+
+
+
+    @RequestMapping("get_requirement")
+    public Map<String,Object> getRequirement(@RequestBody Map<String, Object> map){
+        int pid = Integer.parseInt(map.get("pid").toString());
+
+        Project project = projectService.getProjectById(pid);
+        List<ExtendEpic> extendEpicList = new ArrayList<>();
+
+        List<Epic> epicList = epicService.getEpicByPid(pid);
+
+        for (Epic epic:epicList) {
+            int eid = epic.getEpicId();
+
+            List<Characteristic> characteristicList = characteristicService.getCharacteristicByEid(eid);
+
+            List<ExtendCharacteristic> extendCharacteristicList = new ArrayList<>();
+
+            for (Characteristic c:characteristicList) {
+                int cid = c.getCharacteristicId();
+                List<Story> storyList = storyService.getStoryByCid(cid);
+
+                ExtendCharacteristic extendCharacteristic = new ExtendCharacteristic(c.getCharacteristicId(),c.getEpicId(),c.getName(),c.getOverview(),storyList);
+
+                extendCharacteristicList.add(extendCharacteristic);
+
+            }
+
+
+            ExtendEpic extendEpic = new ExtendEpic(epic.getEpicId(),epic.getProjectId(),epic.getName(),epic.getOverview(),extendCharacteristicList);
+
+            extendEpicList.add(extendEpic);
+
+        }
+
+        Map<String,Object> objectMap = new HashMap<>();
+        objectMap.put("project",project);
+        objectMap.put("epic_list",extendEpicList);
+
+
+        return objectMap;
+
+
     }
 
 

@@ -1,31 +1,22 @@
-package com.code.pojo;
+package com.code.bean;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author xiaoshuai
- * @since 2023-05-12
- */
+import java.io.Serializable;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Epic implements Serializable {
-
+public class ExtendEpic implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "epic_id", type = IdType.AUTO)
@@ -37,9 +28,6 @@ public class Epic implements Serializable {
 
     private String overview;
 
-    public Epic(Integer projectId, String name, String overview) {
-        this.projectId = projectId;
-        this.name = name;
-        this.overview = overview;
-    }
+    private List<ExtendCharacteristic> characteristic_List;
+
 }

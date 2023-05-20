@@ -30,5 +30,14 @@ public class User implements Serializable {
 
     private String name;
 
+    private String account;
 
+    private String password;
+
+
+    public User(String name, String account, String password) {
+        this.name = name;
+        this.account = account;
+        this.password = password;
+    }
 }
