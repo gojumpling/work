@@ -36,24 +36,24 @@ public class UserController {
 
     @RequestMapping("/login")
     public User login(@RequestBody Map<String, Object> map){
-
         String account = map.get("account").toString();
         String password = map.get("password").toString();
-
         return userService.login(account,password);
     }
 
     @RequestMapping("/register")
     public Boolean register(@RequestBody Map<String, Object> map){
-
         String name = map.get("name").toString();
         String account = map.get("account").toString();
         String password = map.get("password").toString();
 
-        User user = new User(name,account,password);
+        User user =  User.builder()
+                .name(name)
+                .account(account)
+                .password(password)
+                .build();
+
         return userService.register(user);
-
-
     }
 
 

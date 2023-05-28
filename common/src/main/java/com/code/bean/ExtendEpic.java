@@ -2,6 +2,7 @@ package com.code.bean;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.code.pojo.Epic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,18 +17,20 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ExtendEpic implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class ExtendEpic extends Epic {
 
-    @TableId(value = "epic_id", type = IdType.AUTO)
-    private Integer epicId;
-
-    private Integer projectId;
-
-    private String name;
-
-    private String overview;
 
     private List<ExtendCharacteristic> characteristic_List;
 
+    public ExtendEpic(Integer epicId, Integer projectId, String name, String overview, List<ExtendCharacteristic> extendCharacteristicList) {
+        this.setEpicId(epicId);
+        setProjectId(projectId);
+        setName(name);
+        setOverview(overview);
+        this.characteristic_List = extendCharacteristicList;
+    }
+
+    public List<ExtendCharacteristic> getCharacteristic_List() {
+        return characteristic_List;
+    }
 }

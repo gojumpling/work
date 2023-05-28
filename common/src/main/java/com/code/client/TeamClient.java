@@ -12,8 +12,7 @@ public interface TeamClient {
     @RequestMapping("/team/add_members")
     Boolean addMembers(Team team);
 
-
-    @RequestMapping("/get_members")
+    @RequestMapping("/team/get_members")
     List<Integer> getProjectID(int uid);
 
 }

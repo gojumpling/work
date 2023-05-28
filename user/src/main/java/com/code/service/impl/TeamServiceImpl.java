@@ -54,12 +54,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
 
         LambdaUpdateWrapper<Team> lambdaUpdateWrapper = new LambdaUpdateWrapper<>();
         lambdaUpdateWrapper.eq(Team::getUserId,team.getUserId()).set(Team::getType,team.getType());
-
-
-
-//        lambdaUpdateWrapper.eq(Team::getProjectId,team.getProjectId());
-//        lambdaUpdateWrapper.eq(Team::getType,team.getType());
-
         return this.update(lambdaUpdateWrapper);
 
     }
