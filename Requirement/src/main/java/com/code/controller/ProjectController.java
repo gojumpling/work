@@ -63,7 +63,10 @@ public class ProjectController {
 
         int pid = projectService.createProject(project);
         int uid = Integer.parseInt(map.get("uid").toString());
-        Team team = new Team(pid,uid,"创建者");
+        Map<String, Object> team = new HashMap<>();
+        team.put("pid",pid);
+        team.put("uid",uid);
+        team.put("type","创建者");
         return teamClient.addMembers(team);
 
     }
@@ -73,8 +76,8 @@ public class ProjectController {
     @RequestMapping("/get_project")
     public List<Project> getProject(@RequestBody Map<String, Object> map){
 
-        int uid = Integer.parseInt(map.get("uid").toString());
-        List<Integer> list = teamClient.getProjectID(uid);
+
+        List<Integer> list = teamClient.getProjectID(map);
 
         return projectService.getProject(list);
     }

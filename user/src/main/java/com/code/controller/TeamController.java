@@ -69,8 +69,10 @@ public class TeamController {
     }
 
     // 仅供需求模块远程调用
-    @RequestMapping("/getProjectID")
-    List<Integer> getProjectID(int uid){
+    @RequestMapping("/get_project")
+    public List<Integer> getProjectID(@RequestBody Map<String, Object> map){
+        int uid = Integer.parseInt(map.get("uid").toString());
+
         return teamService.getProjectID(uid);
     }
 

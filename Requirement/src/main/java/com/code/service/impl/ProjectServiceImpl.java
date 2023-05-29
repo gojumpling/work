@@ -27,7 +27,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         LambdaQueryWrapper<Project> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.orderByDesc(Project::getProjectId);
 
-        return this.getOne(lambdaQueryWrapper).getProjectId();
+        return this.list(lambdaQueryWrapper).get(0).getProjectId();
     }
 
     @Override
