@@ -93,11 +93,8 @@ public class ProjectController {
 
         List<Epic> epicList = epicService.getEpicByPid(pid);
 
-        EpicIterator epicIterator = EpicIterator.getInstance();
-        epicIterator.setEpicList(epicList);
+        for (Epic epic:epicList) {
 
-        while(epicIterator.hashNext()){
-            Epic epic = epicIterator.next();
             int eid = epic.getEpicId();
 
             List<Characteristic> characteristicList = characteristicService.getCharacteristicByEid(eid);
@@ -114,35 +111,11 @@ public class ProjectController {
 
             }
 
-
             ExtendEpic extendEpic = new ExtendEpic(epic.getEpicId(),epic.getProjectId(),epic.getName(),epic.getOverview(),extendCharacteristicList);
 
             extendEpicList.add(extendEpic);
         }
 
-//        for (Epic epic:epicList) {
-//            int eid = epic.getEpicId();
-//
-//            List<Characteristic> characteristicList = characteristicService.getCharacteristicByEid(eid);
-//
-//            List<ExtendCharacteristic> extendCharacteristicList = new ArrayList<>();
-//
-//            for (Characteristic c:characteristicList) {
-//                int cid = c.getCharacteristicId();
-//                List<Story> storyList = storyService.getStoryByCid(cid);
-//
-//                ExtendCharacteristic extendCharacteristic = new ExtendCharacteristic(c.getCharacteristicId(),c.getEpicId(),c.getName(),c.getOverview(),storyList);
-//
-//                extendCharacteristicList.add(extendCharacteristic);
-//
-//            }
-//
-//
-//            ExtendEpic extendEpic = new ExtendEpic(epic.getEpicId(),epic.getProjectId(),epic.getName(),epic.getOverview(),extendCharacteristicList);
-//
-//            extendEpicList.add(extendEpic);
-//
-//        }
 
         Map<String,Object> objectMap = new HashMap<>();
         objectMap.put("project",project);
